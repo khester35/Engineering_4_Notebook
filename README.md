@@ -14,3 +14,27 @@ I actually wrote the code for the calculator straight out before I did anything 
   if (type == 1): # addition
      return(num1+num2)
 ```
+
+However, it gave me an error saying "can only concatenate str (not "int") to str". After a little bit of digging, I found a [forum](https://stackoverflow.com/questions/51252580/how-to-resolve-typeerror-can-only-concatenate-str-not-int-to-str) that helped me out. I ended up changing my code to fix the issue and this is what  Igot. 
+
+```
+  if (type == 1): # addition
+     return(str(num1+num2))
+```
+
+Then, I had to round the quotient to two digits. If you use the round() function, it rounds it to the nearest whole number. I read a little bit about the round() function and how it works, then found the truncate() function. It gives you more control over what place you round to, as described [here](https://realpython.com/python-rounding/). To use this function, I had to define it similarly to what I had to do with doMath. 
+
+```
+def truncate(type, decimals=2) # defining the function that rounds to two decimal places
+  multiplier = 10 ** decimals # 10^decimals
+  return int(type * multiplier)/multiplier
+```
+
+I put the quotient in the truncate function like so: 
+
+```
+  elif (type == 4): # quotient
+    return(str(truncate(num1/num2)))
+```
+
+And it worked perfectly!
