@@ -8,4 +8,9 @@ This assignment is a pretty basic one; therefore, it was easy to find online. Th
 
 ### Python Program 01 - Calculator
 
-I actually wrote the code for the calculator straight out before I did anything else. I found a [page](https://www.sanfoundry.com/python-program-take-numbers-print-quotient-remainder/) that gave me the code and it was extremely easy. 
+I actually wrote the code for the calculator straight out before I did anything else. I found a [page](https://www.sanfoundry.com/python-program-take-numbers-print-quotient-remainder/) that gave me the code and it was extremely easy. I did, however, struggle a little bit with the function. Defining it wasn't all that bad once I finally understood what I was doing but it took a long time and a lot of Google to figure it out. I found [a good explanation](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links) of what exactly functions were, what purposes they served, and how to define them. I defined each number (1-5) as addition, subtraction, etc. 
+
+```
+  if (type == 1): # addition
+     return(num1+num2)
+```
