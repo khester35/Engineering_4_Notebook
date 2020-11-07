@@ -15,7 +15,6 @@ while roll_again == "yes" or roll_again == "y":
     print ("Rolling the dices...")
     print ("The values are....")
     print (random.randint(min, max))
-    print (random.randint(min, max))
 ```
 
 However, the instructions on our assignment were very specific and that's where I ran into a hurdle. It was easy to end the game if you did not type a certain input, but it was much harder to end the game if you did type a certain input. Basically, I had no trouble setting it to repeat if you typed any input—a specific letter, a number, etc.— and end if you didn't. However, the Enter key was the one exception. If I didn't set it to repeat after a specific input, it would never stop, even if I typed in the X. I tried a million things but what ultimately ended up working was swapping the approach. Instead of stating that it would repeat under a specific condition, I had to state that it would stop repeating under a specific condition. 
