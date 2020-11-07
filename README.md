@@ -6,7 +6,7 @@ This is a collection of my assignments from Engineering 4.
 
 #### Objective
 
-In this assignment, we wrote a program that rolls a random number bewtween 1 and 6. The program runs again if the user presses Enter and quits if the user presses "x" and Enter. 
+In this assignment, I wrote a program that rolls a random number bewtween 1 and 6. The program runs again if the user presses Enter and quits if the user presses "x" and Enter. 
 
 #### Methodology/Lesson
 This assignment is a pretty basic one; therefore, it was easy to find online. The [code](https://www.pythonforbeginners.com/code-snippets-source-code/game-rolling-the-dice) I found worked pretty seamlessly; the dice would roll and in order to get it to roll again, you had to type "Y". 
@@ -35,7 +35,7 @@ It seems easy, and honestly, it probably shouldn't have taken me as much time as
 
 #### Objective
 
-In this assignment, we wrote a program that gives you the sum, difference, quotient, and modulo of two numbers. The asks for the user to input two numbers and runs them through one function five times. 
+In this assignment, I wrote a program that gives you the sum, difference, quotient, and modulo of two numbers. The asks for the user to input two numbers and runs them through one function five times. 
 
 #### Methodology/Lesson
 
@@ -74,7 +74,7 @@ And it worked perfectly!
 
 #### Objective
 
-In this assignment, we had to make a quadratic equation solver. The user inputs a, b, and c in the context of the quadratic equation (ax^2 + bx + c) and the solver spits out the roots. 
+In this assignment, I had to make a quadratic equation solver. The user inputs a, b, and c in the context of the quadratic equation (ax^2 + bx + c) and the solver spits out the roots. 
 
 #### Methodology/Lessons
 
@@ -133,4 +133,74 @@ else:
 		print ("The roots are:")
 		print ("x1 = "+str(x1))
 		print ("x2 = "+str(x2))
+```
+
+### Vertical Sentence
+
+#### Objective
+
+I made a program that asks the user for a sentence, then rewrites it vertically by word and by letter. 
+
+#### Methodology/Lesson
+
+First, I learned how to split up the sentence by word. [This forum](https://stackoverflow.com/questions/40027728/i-want-to-split-a-sentence-into-words-and-get-it-to-display-vertically/40027744) had a lot of good advice about splitting by word, so that aspect of the code was pretty straightforward. 
+
+```
+sentence = input("Enter a sentence: ".lower())
+
+sentence = sentence.split()
+for word in sentence:
+	print (word)
+```
+
+First, I tried switching out "word" for "letter" like this:
+
+```
+sentence = input("Enter a sentence: ".lower())
+
+sentence = sentence.split()
+for letter in sentence:
+	print (letter)
+```
+
+It still printed out by word. So, I googled what .split() actually meant. I found [this explanation](https://www.geeksforgeeks.org/python-string-split/), which doesn't go into too much depth but is definitely helpful. Therefore, I took out the sentence = sentence.split() entirely and got this, which worked!
+
+```
+for letter in sentence:
+	print (letter)
+```
+
+Because I couldn't put sentence = sentence.split() after 
+
+```
+for word in sentence:
+```
+
+I just ran the line
+
+```
+for letter in sentence:
+```
+
+first and printed a space to separate the two. Then, I put
+
+```
+sentence = sentence.split()
+for word in sentence:
+	print (word)
+```
+
+and ended up with this!
+
+```
+sentence = input("Enter a sentence: ".lower())
+
+for letter in sentence:
+	print (letter)
+
+print (" ")
+
+sentence = sentence.split()
+for word in sentence:
+	print (word)
 ```
