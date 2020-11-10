@@ -46,7 +46,7 @@ I actually wrote the code for the calculator straight out before I did anything 
      return(num1+num2)
 ```
 
-However, it gave me an error saying "can only concatenate str (not "int") to str". After a little bit of digging, I found a [forum](https://stackoverflow.com/questions/51252580/how-to-resolve-typeerror-can-only-concatenate-str-not-int-to-str) that helped me out. I ended up changing my code to fix the issue and this is what  Igot. 
+However, it gave me an error saying "can only concatenate str (not "int") to str". After a little bit of digging, I found a [forum](https://stackoverflow.com/questions/51252580/how-to-resolve-typeerror-can-only-concatenate-str-not-int-to-str) that helped me out. I ended up changing my code to fix the issue and this is what I got. 
 
 ```
   if (type == 1): # addition
