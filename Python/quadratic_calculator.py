@@ -30,6 +30,9 @@ while 1:
 # quadratic equation
 
 d = (b**2) - (4*a*c) # calculate the discriminant
+x1 = (-b - sqrt(d))/(2*a) # calculate the rest of the quadratic formula
+x2 = (-b + sqrt(d))/(2*a)
+arr = [x1, x2] # array
 
 if a == 0: # if a = 0, the quadratic equation is not a quadratic equation + the code breaks
 	print ("Error")
@@ -38,9 +41,5 @@ else:
 	if d<0: # if the discriminant is negative, it can't be factored
 		print ("No real roots")
 	else:
-		x1 = (-b - sqrt(d))/(2*a)
-		x2 = (-b + sqrt(d))/(2*a)
-
-		print ("The roots are:")
-		print ("x1 = "+str(x1))
-		print ("x2 = "+str(x2))
+	#	for values in arr:
+		print ("The roots are: ", arr)
