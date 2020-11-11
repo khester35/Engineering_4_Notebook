@@ -41,5 +41,4 @@ else:
 	if d<0: # if the discriminant is negative, it can't be factored
 		print ("No real roots")
 	else:
-	#	for values in arr:
 		print ("The roots are: ", arr)
