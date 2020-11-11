@@ -4,11 +4,11 @@
 import time
 
 wrongArr = ["________	",
-	    "|       |	",
-            "|       o	",
-	    "|      /|\\", # \ is an escape character, so you have to escape the escape character
-	    "|      / \\",
-	    "|		",
+	    "|       |  ",
+            "|       O  ",
+            "|      /|\\",
+            "|      / \\", # \ is an escape character, so you have to escape the escape character
+            "|          ",
 	    "|		"]
 
 print ("Hello, Player 1! Hello, Player 2!")
