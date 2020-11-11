@@ -70,7 +70,7 @@ I put the quotient in the truncate function like so:
 
 And it worked perfectly!
 
-### Quadratic Calculator
+### Python Program 02 - Quadratic Solver
 
 #### Objective
 
@@ -133,6 +133,30 @@ else:
 		print ("The roots are:")
 		print ("x1 = "+str(x1))
 		print ("x2 = "+str(x2))
+```
+
+However, this was kind of clunky. So, I used an array. I moved x1 and x2 to where I'd calculated the discriminant and put them into an array. 
+
+``` 
+d = (b**2) - (4*a*c)
+x1 = (-b - sqrt(d))/(2*a)
+x2 = (-b + sqrt(d))/(2*a)
+arr = [x1, x2]
+
+```
+
+I kept the if/else as is and replaced the x1 and x2 with the array like so: 
+
+```
+else: 
+	for values in arr:
+		print ("The roots are: ", arr)
+```
+This worked but it printed each value twice. This was kind of frustrating, but I couldn't tell what I'd done wrong. However, the fix was kind of simple: I commented out "for values in arr:" and it worked perfectly! I ended up with this: 
+
+```
+else: 
+	print ("The roots are: ", arr)
 ```
 
 ### Vertical Sentence
