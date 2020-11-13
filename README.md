@@ -6,7 +6,7 @@ This is a collection of my assignments from Engineering 4.
 
 #### Objective
 
-In this assignment, I wrote a program that rolls a random number bewtween 1 and 6. The program runs again if the user presses Enter and quits if the user presses "x" and Enter. 
+In this assignment, I wrote a program that rolls a random number between 1 and 6. The program runs again if the user presses Enter and quits if the user presses "x" and Enter. 
 
 #### Methodology/Lesson
 This assignment is a pretty basic one; therefore, it was easy to find online. The [code](https://www.pythonforbeginners.com/code-snippets-source-code/game-rolling-the-dice) I found worked pretty seamlessly; the dice would roll and in order to get it to roll again, you had to type "Y". 
