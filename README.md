@@ -6,7 +6,7 @@ This is a collection of my assignments from Engineering 4.
 
 #### Objective
 
-In this assignment, I wrote a program that rolls a random number bewtween 1 and 6. The program runs again if the user presses Enter and quits if the user presses "x" and Enter. 
+In this assignment, I wrote a program that rolls a random number between 1 and 6. The program runs again if the user presses Enter and quits if the user presses "x" and Enter. 
 
 #### Methodology/Lesson
 This assignment is a pretty basic one; therefore, it was easy to find online. The [code](https://www.pythonforbeginners.com/code-snippets-source-code/game-rolling-the-dice) I found worked pretty seamlessly; the dice would roll and in order to get it to roll again, you had to type "Y". 
@@ -227,4 +227,88 @@ print (" ")
 sentence = sentence.split()
 for word in sentence:
 	print (word)
+```
+
+### Python Program 03 - Hangman Game
+
+#### Objective
+
+In this assignment, I made a two-player hangman game. When player 1 inputs the word, player 2 tries to guess it. If player 2 guesses wrong, it prints the hangman. If they guess it right, it prints the letter and dashes in place of the remaining letters. 
+
+### Methodology/Lessons
+
+Before I did anything, I started playing with [arrays](https://www.w3schools.com/python/python_arrays.asp). I did this because the assignment has a lot of different components and I wanted to break them down into digestible pieces. Then, I started out with the [the simplest game I could find](https://www.pythonforbeginners.com/code-snippets-source-code/game-hangman). Going about it this way really helps me to understand the basics of the assignment and if I run into a problem, it's much easier to figure out if it's due to a gap in knowledge or just a lack of experience. I chose to make the game that outputs a generic phrase instead of a complicated array when you're wrong. 
+
+When that started to work, I moved on to the array. I found the [characters](http://www.berkeleyinternet.com/perl/node30.html) to make the actual man. I put them in an array and put each one on a different line. 
+
+```
+wrongArr = ["________	",
+	    "|       |  ",
+            "|       O  ",
+            "|      /|\\",
+            "|      / \\", 
+            "|          ",
+	    "|		"]
+```
+
+I also learned that \ is an escape character. We used it in a previous assignment to represent tab (\t); the \ made it so the code wouldn't just output the letter t and would read it as tab. I set the number of turns allowed equal to the length of the array, which means that if the player doesn't guess all of the letters before the array prints all the way through, they lose. I also set a variable called save equal to turns. 
+
+``` 
+turns = len(wrongArr)
+save = turns 
+```
+
+Setting the turns equal to the length of the array is basically the same as counting the number of inputs in the array and setting the number of turns equal to that. The difference comes if/when I need to change anything about the array. This keeps me from having to change the number of turns too. Setting the new variable equal to turns helps me out later. 
+
+When I printed the array in response to an incorrect guess, I was having trouble printing each input at a time. If I just printed the array like so: 
+
+```
+print (wrongArr)
+```
+
+It would print the array straight out. Then, I found out what the range function was. Range basically sets a list of the values from zero to to whatever value you input. If I write
+
+```
+for i in range(3):
+	print (wrongArr[i])
+```
+
+It will print out the first three values of the array. This is where save comes in handy. If I subtract the amount of turns the player has left from the save, which is equal to the initial amount of turns, which is equal to the length of the array, I get a number that rises as the number of turns lowers.
+
+```
+for i in range(save - turns):
+	print (wrongArr[i])
+```
+
+The game starts by asking the first player to input a word. This is the word that the second player will be trying to guess. The code replaces all of the letters with dashes at first so the second player knows how many letters are in the word. When the second player puts in a guess, the code tries to figure out if it is in the word or not. If it is, it shows that letter wherever applicable and continues to replace the other letters with dashes. If they guess wrong, the failed counter goes up and the array prints out as many outputs as is applicable. 
+
+```
+while turns > 0:
+    failed = 0 
+    for char in word:
+        if char in guesses: 
+            print (char)
+	    
+        else:
+            print ("_")
+            failed += 1 
+```
+
+The following excerpt will clarify what exactly a guess is: an input from the player. 
+
+```
+    guess = input() # ask the user to guess a character
+    guesses += guess # set the player's guess to guesses
+```
+
+If the player runs out of turns (a.k.a the hangman runs through), it ends. If they get it before they do, they win!
+
+```
+if turns == 0:
+            print ("You lost :(")
+```
+```
+if failed == 0:
+	print ("You won")
+        break
 ```
