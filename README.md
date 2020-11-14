@@ -312,3 +312,36 @@ if failed == 0:
 	print ("You won")
         break
 ```
+
+### LED Blink
+
+#### Objective
+
+In this assignment, I connected my Raspberry Pi to a breadboard using a t-cobbler and made an LED blink. 
+
+### Methodology/Lessons
+
+The code for the assignment was relatively simple; however, it was a little different than what I was used to. I found a great [GPIO pinout](https://pinout.xyz/) that explained what each pin was and how to wire things to them. Just like on an Arduino or the boards we used last year, there are pins for general use, VCC, Ground, PWM and more. The GPIO pins don't match up perfectly to the chronological number of the pin it's on (e.g. GPIO 17 is on the 11th pin); however, this diagram really explains it well. I found out from this [site](https://www.tunnelsup.com/raspberry-pi-zero-blink-an-led-using-gpio-pins/) that if you used GPIO 17 for your pin, that's the number you'd put in the code. Here's what mine looked like. 
+
+```
+led = LED(17)
+```
+
+Before that, I had to introduce GPIO and sleep. This is what that looked like. 
+
+```
+from gpiozero import LED
+from time import sleep
+```
+
+I used a while True loop and from there, I set it to blink on and off for a second each. 
+
+```
+while True:
+	led.on()
+	sleep(1)
+	led.off()
+	sleep(1)
+```
+
+The t-cobbler was really interesting; I'd never seen anything like it before. It connected to the pins on the Raspberry Pi and had an attachment on the end with corresponding pins that you attach to the breadboard, straddling the middle line. The pins on the attachment and on the Pi were connected by wires on the t-cobbler. The first time I made the LED light up, it was a little difficult to wire because I had to connect the LED to the breadboard which went straight to the Pi. This meant that I had to use male/female wires and meticulously count each pin to make sure that I didn't hook something up wrong. The t-cobbler attachment clearly labels each pin and you can connect the wires directly to the breadboard, which is a lot easier than trying to count to the 11th or 32nd pin on the Pi. 
