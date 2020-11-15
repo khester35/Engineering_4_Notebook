@@ -345,3 +345,16 @@ while True:
 ```
 
 The t-cobbler was really interesting; I'd never seen anything like it before. It connected to the pins on the Raspberry Pi and had an attachment on the end with corresponding pins that you attach to the breadboard, straddling the middle line. The pins on the attachment and on the Pi were connected by wires on the t-cobbler. The first time I made the LED light up, it was a little difficult to wire because I had to connect the LED to the breadboard which went straight to the Pi. This meant that I had to use male/female wires and meticulously count each pin to make sure that I didn't hook something up wrong. The t-cobbler attachment clearly labels each pin and you can connect the wires directly to the breadboard, which is a lot easier than trying to count to the 11th or 32nd pin on the Pi. 
+
+I then hooked up a power boost to a battery, then to the Pi. This enabled me to run code on the Pi without hooking it up the computer. However, first, I had to find the IP address. I used 
+
+```
+ifconfig
+```
+while the Pi was still plugged in. However, it didn't give me an IP address that I could see, so I tried
+
+```
+hostname -I
+```
+
+instead. This was a little better and it gave me a pretty clear IP address but when I tried to use it on Putty, it didn't work. Dr. Shields helped me fix the problem by enabling SSH capabilities on the Pi and it worked from there! I clicked the SSH button in the Putty setup instead of the Serial and put in the IP address. I left it as the default port number and it worked perfectly! At this point, I had two Putty windows open: the one that was connected to the IP address and the one that I used to get the IP address, the one that the Pi was physically plugged into. After I hooked the Pi onto the booster and the battery, I unplugged it from the computer and ran the code on the other window. The LED lit up with no problem. 
