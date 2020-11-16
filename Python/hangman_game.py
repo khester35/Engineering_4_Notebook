@@ -17,6 +17,7 @@ print ("Player 1, set your word.")
 word = input()
 time.sleep(1)
 
+print ("\n" * 50) #\ in practice! 
 print ("Start guessing, Player 2!")
 time.sleep(0.5)
 
