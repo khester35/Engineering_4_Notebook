@@ -369,3 +369,64 @@ hostname -I
 ```
 
 instead. This was a little better and it gave me a pretty clear IP address but when I tried to use it on Putty, it didn't work. Dr. Shields helped me fix the problem by enabling SSH capabilities on the Pi and it worked from there! I clicked the SSH button in the Putty setup instead of the Serial and put in the IP address. I left it as the default port number and it worked perfectly! At this point, I had two Putty windows open: the one that was connected to the IP address and the one that I used to get the IP address, the one that the Pi was physically plugged into. After I hooked the Pi onto the booster and the battery, I unplugged it from the computer and ran the code on the other window. The LED lit up with no problem. 
+
+### GPIO Pins - Bash
+
+#### Objective
+
+In this assignment, I wrote a Bash script that made 2 LED lights blink 10 times. 
+
+### Methodology/Lessons
+
+I must admit: this assignment was harder than expected. I started out with 
+
+```
+gpio mode 0 out
+gpio write 0 1
+```
+in the terminal. This sets 0 (pin 17) as an output and makes it High, so it'll light up. However, I couldn't figure out how to assign a value to my second LED, which was on pin 22. [This site](https://www.teknotut.com/en/first-raspberry-pi-project-blink-led/#Blink_Project) helped clear it up. In the terminal, I typed 
+
+```
+gpio -g mode 17 out 
+gpio -g mode 22 out 
+```
+
+This set pins 17 and 22 as outputs. Then, I wrote 
+
+```
+gpio -1 write 11 1
+gpio -1 write 15 1
+```
+which turned them both to High. Note that on the GPIO pinout, pin 17 is 11 and pin 22 is 15. Then, still in the terminal, I typed 
+
+```
+which gpio
+```
+This gave me
+
+```
+/usr/bin/gpio
+```
+I opened an .sh file and wrote a loop that made the LED on pin 17 blink. 
+
+```
+#!/bin/bash
+
+while :
+do
+        /usr/bin/gpio -1 toggle 11
+        sleep 1
+done
+```
+I learned that toggle switches it to an opposite condition. So, because I set it to High, it switches to Low, therefore blinking the light on and off. In order to make it blink a set amount of times (in this assignment, I did it 10 times), I used [this site](https://stackoverflow.com/questions/11176284/time-condition-loop-in-shell), which exits the loop after a specific amount of time. Because the blinks are so closely correlated with the time (on for 1 second, off for 1 second), I let the LED blink for 20 seconds and it blinks 10 times. I also added in the second LED. 
+
+```
+end=$((SECONDS+20)) # SECONDS = # of seconds elapsed so far in a script
+
+while [ $SECONDS -lt $end ];
+do
+	/usr/bin/gpio -1 toggle 11 # toggle = switch to opposite condition
+	/usr/bin/gpio -1 toggle 15 # ex. if set to Low, will switch to High
+	sleep 1
+done
+```
