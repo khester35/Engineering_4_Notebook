@@ -430,3 +430,12 @@ do
 	sleep 1
 done
 ```
+
+### GPIO Pins - I2C
+
+#### Objective
+
+In this assignment, I made an OLED screen display X, Y, and Z acceleration values that were measured by my accelerometer. 
+
+#### Methodology/Lesson
+
