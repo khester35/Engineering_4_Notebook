@@ -439,3 +439,59 @@ In this assignment, I made an OLED screen display X, Y, and Z acceleration value
 
 #### Methodology/Lesson
 
+I quite literally put blood, sweat, and tears into this assignment. I started off with some practice on the OLED; I spent some time on some Adafruit code I copiped from their github, but it was old and didn't work very well. So, I copied the shapes.py document (this [terminal cheatsheet](https://learn.adafruit.com/an-illustrated-shell-command-primer/moving-and-copying-files-mv-and-cp) really came in handy) and took out the shapes, just messing around with the text. I decided to comment out the lines I didn't need instead of deleting them, just so I'd have them if I ever needed to go back and take a look at them. First, I familiarized myself with the syntax for printing text on the OLED. 
+
+```
+draw.text((x, top),   'Hello, ',   font=font, fill=255)
+draw.text((x, top+20),   'World',   font=font, fill=255)
+```
+This prints Hello, World on the OLED. The first word is at the top of the screen (as indicated by top) and the second is about a third of the way down (as indicated by top+20). I think that the max value is 64 pixels. That turned out to be something I struggled with later on, so this practice turned out to be really useful because I could rule out potential causes of my problem. When I started the assignment, I began by scanning simpletest.py and pasting all of the important parts into my copied document. 
+
+```
+import Adafruit_SSD1306
+import Adafruit_LSM303
+
+from PIL import Image
+from PIL import ImageDraw
+from PIL import ImageFont
+
+RST = 24
+
+lsm303 = Adafruit_LSM303.LSM303()
+disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST, i2c_address=0x3D)
+```
+This is what it looked like. Then, I learned about different display commands that are important to use when working with the OLED. 
+
+```
+# Initialize library
+disp.begin()
+
+# Clear display.
+disp.clear()
+disp.display()
+
+# Create blank image for drawing.
+# Make sure to create image with mode '1' for 1-bit color.
+width = disp.width
+height = disp.height
+image = Image.new('1', (width, height))
+
+# Get drawing object to draw on image.
+draw = ImageDraw.Draw(image)
+
+# Draw a black filled box to clear the image.
+draw.rectangle((0,0,width,height), outline=0, fill=0)
+```
+All of the comments are pretty self explanatory and I just kept them from when I copied the shapes.py code, so I really appreciated how detailed they were. It took me a while to figure this out, but I learned that when you're trying to wipe a screen, you can't just write
+
+```
+disp.clear()
+```
+because it doesn't actually create a black screen. It just wipes your image and when you call for any new image to come back, the old one will come back too. I finally figured out that in order to actually clear a screen so when you call the new image, that's the only one that shows up, you have to write:
+
+```
+draw.rectangle((0,0,width,height), outline=0, fill=0)
+disp.image(image)
+disp.display()
+```
+When you do that, it creates a black screen, prints that image, then your new image will print on top of that. It's a little confusing at first, but it made a lot of sense when I put it in practical use! 
