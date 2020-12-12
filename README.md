@@ -494,4 +494,20 @@ draw.rectangle((0,0,width,height), outline=0, fill=0)
 disp.image(image)
 disp.display()
 ```
-When you do that, it creates a black screen, prints that image, then your new image will print on top of that. It's a little confusing at first, but it made a lot of sense when I put it in practical use! 
+When you do that, it creates a black screen, prints that image, then your new image will print on top of that. It's a little confusing at first, but it made a lot of sense when I put it into practical use! Next, I wrote:
+
+```
+draw.text((x, top+10),   'Printing accelerometer',   font=font, fill=255)
+draw.text((x, top+20),   'r & magnetometer X, Y', font=font, fill=255)
+draw.text((x, top+30),   'Z axis values', font=font, fill=255)
+disp.image(image)
+disp.display()
+
+time.sleep(3)
+```
+This splits up a sentence into three different lines because I noticed that when I print them all in one, it just runs off the screen. After it prints that, it pauses for three seconds and then it clears with the same lines I introduced before. At first, I had it print in a while loop, but it started printing inputs on top of inputs, so I took it out and put the while loop after. Trying to get the accelerometer values to print was the most difficult part. When I printed 
+
+```
+  draw.text((x, top), "Accel X={0}, Accel Y={1}, Accel Z={2}, Mag X={3}, Mag Y={4}, Mag Z={5}".format(accel_x, accel_y, accel_z, mag_x, mag_y, mag_z), font=font, fill=255)
+```
+it worked fine. However, when I tried to split it up so they would print vertically, I ran into a problem.
