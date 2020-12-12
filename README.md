@@ -510,4 +510,26 @@ This splits up a sentence into three different lines because I noticed that when
 ```
   draw.text((x, top), "Accel X={0}, Accel Y={1}, Accel Z={2}, Mag X={3}, Mag Y={4}, Mag Z={5}".format(accel_x, accel_y, accel_z, mag_x, mag_y, mag_z), font=font, fill=255)
 ```
-it worked fine. However, when I tried to split it up so they would print vertically, I ran into a problem.
+it worked fine. However, when I tried to split it up so they would print vertically, I ran into a problem. When I printed
+```  
+	draw.text((x, top), "Accel X={0}".format(accel_x), font=font, fill=255)
+        draw.text((x, top+10), "Accel Y={1}".format(accel_y), font=font, fill=255)
+```
+I got an error telling me that the value I'd called for didn't exist. I finally realized that I was calling the values inside format() instead of inside the accel that I'd defined above the while loop in the lines
+
+```
+accel, mag = lsm303.read()
+accel_x, accel_y, accel_z = accel
+mag_x, mag_y, mag_z = mag
+```
+So, I wrote them all out like this:
+
+```
+  draw.text((x, top), "Accel X={0}".format(accel_x), font=font, fill=255)
+        draw.text((x, top+10), "Accel Y={0}".format(accel_y), font=font, fill=255)
+        draw.text((x, top+20), "Accel Z={0}".format(accel_z), font=font, fill=255)
+        draw.text((x, top+30), "Mag X={0}".format(mag_x), font=font, fill=255)
+        draw.text((x, top+40), "Mag Y={0}".format(mag_y), font=font, fill=255)
+        draw.text((x, top+50), "Mag Z={0}".format(mag_z), font=font, fill=255)
+```
+and it worked perfectly!
