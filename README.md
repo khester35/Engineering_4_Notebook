@@ -533,3 +533,15 @@ So, I wrote them all out like this:
         draw.text((x, top+50), "Mag Z={0}".format(mag_z), font=font, fill=255)
 ```
 and it worked perfectly!
+
+### Hello Flask
+
+#### 
+
+In this assignment, I set up my Raspberry Pi as a web server.
+
+#### Methodology/Lesson
+
+This was pretty thoroughly explained in the Canvas assignment, but here's a picture of what the page looked like when I finished it!
+
+![Web Server](https://github.com/khester35/Engineering_4_Notebook/blob/master/Images/Hello%20World.PNG)
