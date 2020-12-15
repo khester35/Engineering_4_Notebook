@@ -430,3 +430,106 @@ do
 	sleep 1
 done
 ```
+
+### GPIO Pins - I2C
+
+#### Objective
+
+In this assignment, I made an OLED screen display X, Y, and Z acceleration values that were measured by my accelerometer. 
+
+#### Methodology/Lesson
+
+I quite literally put blood, sweat, and tears into this assignment. I started off with some practice on the OLED; I spent some time on some Adafruit code I copiped from their github, but it was old and didn't work very well. So, I copied the shapes.py document (this [terminal cheatsheet](https://learn.adafruit.com/an-illustrated-shell-command-primer/moving-and-copying-files-mv-and-cp) really came in handy) and took out the shapes, just messing around with the text. I decided to comment out the lines I didn't need instead of deleting them, just so I'd have them if I ever needed to go back and take a look at them. First, I familiarized myself with the syntax for printing text on the OLED. 
+
+```
+draw.text((x, top),   'Hello, ',   font=font, fill=255)
+draw.text((x, top+20),   'World',   font=font, fill=255)
+```
+This prints Hello, World on the OLED. The first word is at the top of the screen (as indicated by top) and the second is about a third of the way down (as indicated by top+20). I think that the max value is 64 pixels. That turned out to be something I struggled with later on, so this practice turned out to be really useful because I could rule out potential causes of my problem. When I started the assignment, I began by scanning simpletest.py and pasting all of the important parts into my copied document. 
+
+```
+import Adafruit_SSD1306
+import Adafruit_LSM303
+
+from PIL import Image
+from PIL import ImageDraw
+from PIL import ImageFont
+
+RST = 24
+
+lsm303 = Adafruit_LSM303.LSM303()
+disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST, i2c_address=0x3D)
+```
+This is what it looked like. Then, I learned about different display commands that are important to use when working with the OLED. 
+
+```
+# Initialize library
+disp.begin()
+
+# Clear display.
+disp.clear()
+disp.display()
+
+# Create blank image for drawing.
+# Make sure to create image with mode '1' for 1-bit color.
+width = disp.width
+height = disp.height
+image = Image.new('1', (width, height))
+
+# Get drawing object to draw on image.
+draw = ImageDraw.Draw(image)
+
+# Draw a black filled box to clear the image.
+draw.rectangle((0,0,width,height), outline=0, fill=0)
+```
+All of the comments are pretty self explanatory and I just kept them from when I copied the shapes.py code, so I really appreciated how detailed they were. It took me a while to figure this out, but I learned that when you're trying to wipe a screen, you can't just write
+
+```
+disp.clear()
+```
+because it doesn't actually create a black screen. It just wipes your image and when you call for any new image to come back, the old one will come back too. I finally figured out that in order to actually clear a screen so when you call the new image, that's the only one that shows up, you have to write:
+
+```
+draw.rectangle((0,0,width,height), outline=0, fill=0)
+disp.image(image)
+disp.display()
+```
+When you do that, it creates a black screen, prints that image, then your new image will print on top of that. It's a little confusing at first, but it made a lot of sense when I put it into practical use! Next, I wrote:
+
+```
+draw.text((x, top+10),   'Printing accelerometer',   font=font, fill=255)
+draw.text((x, top+20),   'r & magnetometer X, Y', font=font, fill=255)
+draw.text((x, top+30),   'Z axis values', font=font, fill=255)
+disp.image(image)
+disp.display()
+
+time.sleep(3)
+```
+This splits up a sentence into three different lines because I noticed that when I print them all in one, it just runs off the screen. After it prints that, it pauses for three seconds and then it clears with the same lines I introduced before. At first, I had it print in a while loop, but it started printing inputs on top of inputs, so I took it out and put the while loop after. Trying to get the accelerometer values to print was the most difficult part. When I printed 
+
+```
+  draw.text((x, top), "Accel X={0}, Accel Y={1}, Accel Z={2}, Mag X={3}, Mag Y={4}, Mag Z={5}".format(accel_x, accel_y, accel_z, mag_x, mag_y, mag_z), font=font, fill=255)
+```
+it worked fine. However, when I tried to split it up so they would print vertically, I ran into a problem. When I printed
+```  
+	draw.text((x, top), "Accel X={0}".format(accel_x), font=font, fill=255)
+        draw.text((x, top+10), "Accel Y={1}".format(accel_y), font=font, fill=255)
+```
+I got an error telling me that the value I'd called for didn't exist. I finally realized that I was calling the values inside format() instead of inside the accel that I'd defined above the while loop in the lines
+
+```
+accel, mag = lsm303.read()
+accel_x, accel_y, accel_z = accel
+mag_x, mag_y, mag_z = mag
+```
+So, I wrote them all out like this:
+
+```
+  draw.text((x, top), "Accel X={0}".format(accel_x), font=font, fill=255)
+        draw.text((x, top+10), "Accel Y={0}".format(accel_y), font=font, fill=255)
+        draw.text((x, top+20), "Accel Z={0}".format(accel_z), font=font, fill=255)
+        draw.text((x, top+30), "Mag X={0}".format(mag_x), font=font, fill=255)
+        draw.text((x, top+40), "Mag Y={0}".format(mag_y), font=font, fill=255)
+        draw.text((x, top+50), "Mag Z={0}".format(mag_z), font=font, fill=255)
+```
+and it worked perfectly!
