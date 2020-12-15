@@ -542,6 +542,6 @@ In this assignment, I set up my Raspberry Pi as a web server.
 
 #### Methodology/Lesson
 
-This was pretty thoroughly explained in the Canvas assignment, but here's a picture of what the page looked like when I finished it!
+This was pretty thoroughly explained in the Canvas assignment, but here's a picture of what the page looked like when I finished and tested it!
 
 ![Web Server](https://github.com/khester35/Engineering_4_Notebook/blob/master/Images/Hello%20World.PNG)
