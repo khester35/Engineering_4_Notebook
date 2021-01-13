@@ -582,3 +582,4 @@ disp.display()
 
 time.sleep(0.0000001)
 ```
+I then connected it to the battery, ran the code, and took a walk with the hardware in tow! It worked perfectly.
