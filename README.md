@@ -536,7 +536,7 @@ and it worked perfectly!
 
 ### Hello Flask
 
-#### 
+#### Objective
 
 In this assignment, I set up my Raspberry Pi as a web server.
 
@@ -545,3 +545,22 @@ In this assignment, I set up my Raspberry Pi as a web server.
 This was pretty thoroughly explained in the Canvas assignment, but here's a picture of what the page looked like when I finished and tested it!
 
 ![Web Server](https://github.com/khester35/Engineering_4_Notebook/blob/master/Images/Hello%20World.PNG)
+
+### Headless 
+
+#### Objective
+
+In this assignment we were to display the data from the accelerometer graphically and attach it to the battery, enabling it to operate away from the computer. 
+
+#### Methodology/Lesson
+
+My OLED screen shows the height of a box changing alongside the X value of the accelerometer's acceleration and the width changing with the Y. 
+
+```
+percx = accel_x/1138
+percy = accel_y/900
+
+draw.rectangle((x, height, (x+shape_width)*percy, height-(height-2)*percx), outline=255, fill=255)
+```
+
+percx = accel_x/1138 divides the X value by the maximum value it can reach. This creates the percentage of x, which becomes the percentage of the rectangle that is shown. It works similarly with the Y values. 
