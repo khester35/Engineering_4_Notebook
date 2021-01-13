@@ -558,9 +558,27 @@ My OLED screen shows the height of a box changing alongside the X value of the a
 
 ```
 percx = accel_x/1138
-percy = accel_y/900
+percy = accel_y/1138
 
 draw.rectangle((x, height, (x+shape_width)*percy, height-(height-2)*percx), outline=255, fill=255)
 ```
 
-percx = accel_x/1138 divides the X value by the maximum value it can reach. This creates the percentage of x, which becomes the percentage of the rectangle that is shown. It works similarly with the Y values. 
+percx = accel_x/1138 divides the X value by the maximum value it can reach. This creates the percentage of x, which becomes the percentage of the rectangle that is shown. It works similarly with the Y values. I found the maximum value by having the OLED count up as the accelerometer values count up. When it stopped counting despite me still moving it up and around, I used that value as the maximum value. 
+
+I wipe the screen every time the value changes so when the graph moves around, it's not images on top of images on top of images. 
+
+```
+draw.rectangle((x, height, (x+shape_width)*percy, height-(height-2)*percx), outline=255, fill=255)
+
+disp.image(image)
+disp.display()
+
+time.sleep(0.1)
+
+draw.rectangle((0,0,width,height), outline=0, fill=0)
+
+disp.image(image)
+disp.display()
+
+time.sleep(0.0000001)
+```
