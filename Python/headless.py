@@ -96,7 +96,7 @@ while True:
 	mag_x, mag_y, mag_z = mag
 
 	percx = accel_x/1138
-	percy = accel_y/900
+	percy = accel_y/1138
 
 #	draw.text((x, top), "Accel X={0}".format(max), font=font, fill=255)
 	draw.rectangle((x, height, (x+shape_width)*percy, height-(height-2)*percx), outline=255, fill=255)
