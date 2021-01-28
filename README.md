@@ -583,3 +583,48 @@ disp.display()
 time.sleep(0.0000001)
 ```
 I then connected it to the battery, ran the code, and took a walk with the hardware in tow! It worked perfectly.
+
+### GPIO - Flask 
+
+#### Objective
+
+In this assignment, we were to turn an LED light on over the Internet!
+
+#### Methodology/Lesson
+
+This assignment was fairly easy up to a certain point, given that the instructions provided code. However, I got a long error saying that my permissions were denied. First, I tried to change the code that previously read 
+
+```
+app.run(host="0.0.0.0", port=80)
+```
+to read 
+
+```
+app.run(host="10.0.0.248", port=22)
+```
+to match my IP address and my port #. I got the same response, so I looked up the error. It told me that my permissions weren't allowing me to access the file, so I tried a few commands in the terminal including 
+
+```
+chown app.py
+```
+and 
+
+```
+chmod 755 app.py
+```
+which went through easily, but didn't result in a different error. Next, I tried 
+
+```
+sudo python3 app.py
+```
+which told me that it was already in use. I tried a few other commands which didn't work, but what ultimately led to success was 
+
+```
+app.run(host="0.0.0.0", port=8080)
+```
+and 
+
+```
+sudo python3 app.py
+```
+Then, I went to my browser and searched 10.0.0.248:8080. After a quick tweak to my wiring, it worked!
