@@ -558,9 +558,73 @@ My OLED screen shows the height of a box changing alongside the X value of the a
 
 ```
 percx = accel_x/1138
-percy = accel_y/900
+percy = accel_y/1138
 
 draw.rectangle((x, height, (x+shape_width)*percy, height-(height-2)*percx), outline=255, fill=255)
 ```
 
-percx = accel_x/1138 divides the X value by the maximum value it can reach. This creates the percentage of x, which becomes the percentage of the rectangle that is shown. It works similarly with the Y values. 
+percx = accel_x/1138 divides the X value by the maximum value it can reach. This creates the percentage of x, which becomes the percentage of the rectangle that is shown. It works similarly with the Y values. I found the maximum value by having the OLED count up as the accelerometer values count up. When it stopped counting despite me still moving it up and around, I used that value as the maximum value. 
+
+I wipe the screen every time the value changes so when the graph moves around, it's not images on top of images on top of images. 
+
+```
+draw.rectangle((x, height, (x+shape_width)*percy, height-(height-2)*percx), outline=255, fill=255)
+
+disp.image(image)
+disp.display()
+
+time.sleep(0.1)
+
+draw.rectangle((0,0,width,height), outline=0, fill=0)
+
+disp.image(image)
+disp.display()
+
+time.sleep(0.0000001)
+```
+I then connected it to the battery, ran the code, and took a walk with the hardware in tow! It worked perfectly.
+
+### GPIO - Flask 
+
+#### Objective
+
+In this assignment, we were to turn an LED light on over the Internet!
+
+#### Methodology/Lesson
+
+This assignment was fairly easy up to a certain point, given that the instructions provided code. However, I got a long error saying that my permissions were denied. First, I tried to change the code that previously read 
+
+```
+app.run(host="0.0.0.0", port=80)
+```
+to read 
+
+```
+app.run(host="10.0.0.248", port=22)
+```
+to match my IP address and my port #. I got the same response, so I looked up the error. It told me that my permissions weren't allowing me to access the file, so I tried a few commands in the terminal including 
+
+```
+chown app.py
+```
+and 
+
+```
+chmod 755 app.py
+```
+which went through easily, but didn't result in a different error. Next, I tried 
+
+```
+sudo python3 app.py
+```
+which told me that it was already in use. I tried a few other commands which didn't work, but what ultimately led to success was 
+
+```
+app.run(host="0.0.0.0", port=8080)
+```
+and 
+
+```
+sudo python3 app.py
+```
+Then, I went to my browser and searched 10.0.0.248:8080. After a quick tweak to my wiring, it worked!
