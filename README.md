@@ -628,3 +628,39 @@ and
 sudo python3 app.py
 ```
 Then, I went to my browser and searched 10.0.0.248:8080. After a quick tweak to my wiring, it worked!
+
+### Pi Camera 
+
+#### Objective
+
+In this assignment, we were to make a camera take pictures in two ways: first, we had to print "running" while the camera was taking the picture and "done" when it was finished Second, we had to write a program that, when run, took five photos with five different effects. 
+
+#### Methodology/Lesson
+
+This lesson was definitely fun, but thanks to the [resources](https://picamera.readthedocs.io/en/release-1.10/recipes1.html) provided in the assignment, it wasn't too hard. The only issue I ran into was with the second assignment. I was a little confused on how to get each effect to apply to each different photo, but I figured that an array would work best. I used this: 
+
+'''
+effects = ["negative", "solarize", "sketch", "oilpaint", "blur"]
+'''
+to clarify which effects I wanted to use. Then, I used this: 
+
+'''
+for i in range(len(effects)):
+        camera.image_effect = effects[i]
+'''
+
+to clarify where I wanted to apply them. I decided to write len(effects) instead of the number of inputs in the array because I didn't want to restrict it to five; I know that the assignment would have been fulfilled if I'd simply written the relevant number of effects in the array, but I wanted to make sure that it wouldn't malfunction if I decided to change the number of effects I used. In order to make it neat and pretty, I had it print "running" while it was running and used this: 
+
+'''
+nme = input("enter file name:\n")
+'''
+
+and later, this: 
+
+'''
+ camera.capture(nme + effects[i] + ".jpg")
+        print("done")
+        print("file saved as: "+nme + effects[i] + ".jpg\n")
+'''
+
+so it would name each file something unique and state the saved file at the end! 
